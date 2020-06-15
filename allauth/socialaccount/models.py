@@ -14,7 +14,7 @@ from allauth.account.models import EmailAddress
 from allauth.account.utils import get_next_redirect_url, setup_user_email
 from allauth.utils import get_user_model
 
-from ..utils import get_request_param
+from ..utils import get_request_param, import_callable
 from . import app_settings, providers
 from .adapter import get_adapter
 from .fields import JSONField
@@ -37,7 +37,7 @@ class SocialAppManager(models.Manager):
 
 
 class SocialApp(models.Model):
-    objects = SocialAppManager()
+    objects = import_callable(app_settings.SOCIALAPP_MANAGER)()
 
     provider = models.CharField(verbose_name=_('provider'),
                                 max_length=30,

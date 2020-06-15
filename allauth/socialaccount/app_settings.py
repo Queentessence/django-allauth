@@ -71,6 +71,12 @@ class AppSettings(object):
     def UID_MAX_LENGTH(self):
         return 191
 
+    @property
+    def SOCIALAPP_MANAGER(self):
+        return self._setting('SOCIALAPP_MANAGER',
+                             'allauth.socialaccount.models'
+                             '.SocialAppManager')
+
 
 # Ugly? Guido recommends this himself ...
 # http://mail.python.org/pipermail/python-ideas/2012-May/014969.html
